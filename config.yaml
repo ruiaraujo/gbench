@@ -70,7 +70,7 @@ servers:
     duration: 5s
 
 - name: Go
-  endpoint: http://localhost:8080/query
+  endpoint: http://localhost:8082/query
   run:
     command: go run schema.go server.go
     cwd: servers/go/

@@ -111,21 +111,21 @@ fast-json-stringify@^1.9.1:
     ajv "^6.5.4"
     deepmerge "^2.1.1"
 
-graphql-jit@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/graphql-jit/-/graphql-jit-0.0.3.tgz#06ba59f6bf9fddc7b9ea627f6e13ab6a68e6bb08"
-  integrity sha512-oAeO+QlmZt1z6BZprx3Npbz3W/BkA7j/PMeg+a8Z1ytqTXJrkJEhcMzaD8t/h23AO7BSECc9/MgYIM05GxJ/yA==
+graphql-jit@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/graphql-jit/-/graphql-jit-0.0.6.tgz#10f9a4014259a24b41d7e3e9e838b1c77567948a"
+  integrity sha512-W1a/f4QTEfqcRta4ak+Kx7ABYjIf+9ZNk1LNUINeFbPQhp03tHpiZ0z9iLTGkKW7ZobDzj3gBrkyznqNJKweGg==
   dependencies:
     fast-json-stringify "^1.9.1"
     json-schema "^0.2.3"
     lodash.merge "^4.6.1"
 
-graphql@^0.13.2:
-  version "0.13.2"
-  resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.13.2.tgz#4c740ae3c222823e7004096f832e7b93b2108270"
-  integrity sha512-QZ5BL8ZO/B20VA8APauGBg3GyEgZ19eduvpLWoq5x7gMmWnHoy8rlQWPLmWgFvo1yNgjSEFMesmS4R6pPr7xog==
+graphql@^14.0.2:
+  version "14.0.2"
+  resolved "https://registry.yarnpkg.com/graphql/-/graphql-14.0.2.tgz#7dded337a4c3fd2d075692323384034b357f5650"
+  integrity sha512-gUC4YYsaiSJT1h40krG3J+USGlwhzNTXSb4IOZljn9ag5Tj+RkoXrWp+Kh7WyE3t1NCfab5kzCuxBIvOMERMXw==
   dependencies:
-    iterall "^1.2.1"
+    iterall "^1.2.2"
 
 has-flag@^3.0.0:
   version "3.0.0"
@@ -174,7 +174,7 @@ is-stream@1.1.0:
   resolved "https://registry.yarnpkg.com/is-stream/-/is-stream-1.1.0.tgz#12d4a3dd4e68e0b79ceb8dbc84173ae80d91ca44"
   integrity sha1-EtSj3U5o4Lec6428hBc66A2RykQ=
 
-iterall@^1.2.1:
+iterall@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/iterall/-/iterall-1.2.2.tgz#92d70deb8028e0c39ff3164fdbf4d8b088130cd7"
   integrity sha512-yynBb1g+RFUPY64fTrFv7nsjRrENBQJaX2UL+2Szc9REFrSNm1rpSXHGzhmAy7a9uv3vlvgBlXnf9RqmPH1/DA==
@@ -202,10 +202,10 @@ lru-cache@^4.1.3:
     pseudomap "^1.0.2"
     yallist "^2.1.2"
 
-micro@^9.3.2:
-  version "9.3.2"
-  resolved "https://registry.yarnpkg.com/micro/-/micro-9.3.2.tgz#41e249fe96a33db056f0a5dabb32c8fd4b69c5ca"
-  integrity sha512-hBJr12PIz3C+z76TUS/C+zQ+T+tXnUixcN8faWtRdO1NxRWrg8J4hbMIrXvAEbgIY0Vet3KnDsJoadcN88kJdw==
+micro@^9.3.3:
+  version "9.3.3"
+  resolved "https://registry.yarnpkg.com/micro/-/micro-9.3.3.tgz#32728c7be15e807691ead85da27fd8117a8bca24"
+  integrity sha512-GbCp4NFQguARch0odX+BuWDja2Kc1pbYZqWfRvEDihGFTJG8U77C0L+Owg2j7TPyhQ5Tc+7z/SxspRqjdiZCjQ==
   dependencies:
     arg "2.0.0"
     chalk "2.4.0"
