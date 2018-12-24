@@ -69,12 +69,22 @@ servers:
     concurrency: 1
     duration: 5s
 
-- name: Go
-  endpoint: http://localhost:8082/query
+- name: Gophers Go
+  endpoint: http://localhost:8082/graphql
   run:
     command: go run schema.go server.go
-    cwd: servers/go/
-    startupTime: 15s
+    cwd: servers/graph-gophers/
+    startupTime: 5s
+  warmup:
+    concurrency: 1
+    duration: 5s
+
+- name: Graphql-Go
+  endpoint: http://localhost:8083/graphql
+  run:
+    command: go run server.go
+    cwd: servers/graphql-go/
+    startupTime: 5s
   warmup:
     concurrency: 1
     duration: 5s
@@ -92,9 +102,9 @@ queries:
   filename: queries/object_list.graphql
   expectedResultFilename: queries/object_list.json
 
-#- name: Interface List
-#  filename: queries/interface_list.graphql
-#  expectedResultFilename: queries/interface_list.json
+- name: Interface List
+  filename: queries/interface_list.graphql
+  expectedResultFilename: queries/interface_list.json
 
 - name: Introspection
   filename: queries/introspection.graphql

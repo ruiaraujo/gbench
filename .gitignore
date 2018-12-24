@@ -1,3 +1,5 @@
 /wrk.log
 /__pycache__
 __pycache__
+/servers/graph-gophers/go
+/servers/graphql-go/gbench

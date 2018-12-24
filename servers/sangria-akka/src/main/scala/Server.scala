@@ -29,7 +29,7 @@ object Server extends App {
   implicit val materializer = ActorMaterializer()
 
   import system.dispatcher
-  
+
   def executeGraphQL(query: Document, operationName: Option[String], variables: Json) =
     complete(Executor.execute(SchemaDefinition.ExampleSchema, query, new Context,
       variables = if (variables.isNull) Json.obj() else variables,

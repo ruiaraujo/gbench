@@ -11,21 +11,21 @@ object SchemaDefinition {
     * Resolves the lists of characters. These resolutions are batched and
     * cached for the duration of a query.
     */
-  // val Base: InterfaceType[Context, Base] =
-  //   InterfaceType(
-  //     "Base",
-  //     "",
-  //     () ⇒ fields[Context, Base](
-  //       Field("id", StringType,
-  //         Some("The id of the character."),
-  //         resolve = _.value.id),
-  //     ))
+   val BaseInterface: InterfaceType[Context, Base] =
+     InterfaceType(
+       "Base",
+       "",
+       () ⇒ fields[Context, Base](
+         Field("id", StringType,
+           Some("The id of the character."),
+           resolve = _.value.id),
+       ))
 
   val Query: ObjectType[Context, Query] =
     ObjectType(
       "Query",
       "",
-      // interfaces[Context, Query](Base),
+      interfaces[Context, Query](BaseInterface),
       () => fields[Context, Query](
         Field("id", StringType,
           Some(""),
@@ -37,6 +37,9 @@ object SchemaDefinition {
           Some(""),
           resolve = _.value.listOfStrings),
         Field("listOfObjects", ListType(Query),
+          Some(""),
+          resolve = c => Base.listOfObjects),
+        Field("listOfInterfaces", ListType(BaseInterface),
           Some(""),
           resolve = c => Base.listOfObjects),
       ))
