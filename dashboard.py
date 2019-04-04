@@ -4,13 +4,8 @@ import dash
 from dash.dependencies import Input, Output
 import dash_core_components as dcc
 import dash_html_components as html
-import click
-
 import json
-import itertools
 
-import sys
-import argparse
 
 def compute_xs(program_rps_map):
     # l = list(set(itertools.chain(*[d.keys() for d in program_rps_map.values()])))
@@ -61,7 +56,7 @@ def get_ymetric_fn(yMetric, on='latency'):
 
     if on == 'latency':
         return lambda x: None if round(yMetricFn(x)/1000, 2) > 1000 else round(yMetricFn(x)/1000, 2)
-    
+
     return lambda x: int(yMetricFn(x))
 
 
@@ -102,7 +97,6 @@ def run_dash_server(bench_results, debug=False):
     @app.callback(
         Output('response-time-vs-query', 'figure'),
         [
-            # Input('benchmark-index', 'value'),
             Input('response-time-metric', 'value')
         ]
     )
@@ -146,3 +140,9 @@ def run_dash_server(bench_results, debug=False):
         return figure
 
     app.run_server(host="0.0.0.0", port=8080, debug=debug)
+
+if __name__ == '__main__':
+    with open('./results.json', 'r') as f:
+        contents = f.read()
+    bench_results = json.loads(contents)
+    run_dash_server(bench_results)

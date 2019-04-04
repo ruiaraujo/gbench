@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "name": "gbench",
+  "builds": [
+    { "src": "dashboard.py", "use": "@now/python", "config": { "wsgi": true, "maxLambdaSize": "50mb" } },
+    { "src": "results.json", "use": "@now/static" }
+  ],
+  "routes": [
+    { "src": "/.*", "dest": "/"}
+  ]
+}

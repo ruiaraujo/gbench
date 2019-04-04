@@ -162,7 +162,7 @@ class Program(object):
             contents = f.read()
         bench_results = json.loads(contents)
         from dashboard import run_dash_server
-        run_dash_server(bench_results, debug=True)
+        run_dash_server(bench_results)
 
     def benchmark(self, config, output=None):
         """Starts a benchmark given config and an optional output file"""
@@ -216,3 +216,4 @@ async def _main(config, output):
 
 if __name__ == "__main__":
     fire.Fire(Program)
+
