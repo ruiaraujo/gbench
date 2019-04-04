@@ -5,12 +5,12 @@ const LRU = require("lru-cache")
 const {compileQuery} = require("graphql-jit");
 
 
-module.exports = function setupHandler(schema, disableLeafSerialization) {
-    const cache = LRU({max: 100});
+module.exports = function setupHandler(schema) {
+    const cache = new LRU({max: 100});
     return function graphqlMiddleware(request, response) {
         // Promises are used as a mechanism for capturing any thrown errors during
         // the asynchronous process below.
-
+        let stringify = JSON.stringify;
         // Parse the Request to get GraphQL request parameters.
         return getGraphQLParams(request).then(function (graphQLParams) {
 
@@ -70,9 +70,18 @@ module.exports = function setupHandler(schema, disableLeafSerialization) {
                     }
                 }
 
-                cached = compileQuery(schema, documentAST, operationName, {disableLeafSerialization});
+                cached = compileQuery(schema, documentAST, operationName, {
+                    customSerializers: {
+                        String: String,
+                        ID: String,
+                        Boolean: Boolean,
+                        Int: Number,
+                        Float: Number
+                    }
+                });
                 cache.set(query + operationName, cached)
             }
+            stringify = cached.stringify;
 
             // Perform the execution, reporting any errors creating the context.
             try {
@@ -95,17 +104,13 @@ module.exports = function setupHandler(schema, disableLeafSerialization) {
             if (response.statusCode === 200 && result && !result.data) {
                 response.statusCode = 500;
             }
-            // Format any encountered errors.
-            if (result && result.errors) {
-                result.errors = result.errors.map(graphql.formatError);
-            }
             // At this point, result is guaranteed to exist, as the only scenario
             // where it will not is when showGraphiQL is true.
             if (!result) {
                 throw httpErrors(500, 'Internal Error');
             }
 
-            return result
+            return stringify(result)
         });
     };
 

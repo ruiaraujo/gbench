@@ -8,20 +8,6 @@ headers = {
     'Content-Type': 'application/json; charset=utf8'
 }
 
-DEFAULT_QUERY = '''
-query BasicQuery {
-  #listOfObjects {
-  #  string
-  #}
-  listOfInterfaces {
-    id
-    ...on Query {
-      string
-    }
-  }
-}
-'''
-
 
 def json_response(request, data):
     return request.Response(
@@ -46,9 +32,6 @@ def get_query_data(request):
                 'operationName': request.query.get('operationName')
             }
         return get_json_body(request)
-    else:
-        # We are in test mode
-        return {'query': DEFAULT_QUERY}
 
 backend = GraphQLCachedBackend(GraphQLCoreBackend())
 quiver_backend = GraphQLCachedBackend(GraphQLQuiverCloudBackend(

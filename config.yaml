@@ -49,17 +49,8 @@ servers:
     concurrency: 1
     duration: 5s
 
-- name: Node JIT - No leaf
-  endpoint: http://localhost:4000/graphql
-  run:
-    command: node app.js disable-leaf
-    cwd: servers/node-jit/
-    startupTime: 2s
-  warmup:
-    concurrency: 1
-    duration: 5s
 
-- name: Node JIT - Leaf
+- name: Node JIT
   endpoint: http://localhost:4000/graphql
   run:
     command: node app.js

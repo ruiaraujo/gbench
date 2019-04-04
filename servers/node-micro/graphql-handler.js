@@ -5,7 +5,7 @@ const LRU = require("lru-cache")
 
 
 module.exports = function setupHandler(schema) {
-    const cache = LRU({max: 100});
+    const cache = new LRU({max: 100});
     return function graphqlMiddleware(request, response) {
         // Promises are used as a mechanism for capturing any thrown errors during
         // the asynchronous process below.
