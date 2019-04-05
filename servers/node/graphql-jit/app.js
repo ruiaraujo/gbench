@@ -22,7 +22,7 @@ if(cluster.isMaster) {
     const micro = require('micro');
     const graphqlHandler = require('./graphql-handler');
     // The root provides a resolver function for each API endpoint
-    const server = micro(graphqlHandler(require("./schema")));
+    const server = micro(graphqlHandler(require("./schema"), process.argv[2] === "fast-json"));
 
     server.listen(4000);
 }

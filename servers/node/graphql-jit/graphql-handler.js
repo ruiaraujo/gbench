@@ -5,7 +5,8 @@ const LRU = require("lru-cache")
 const {compileQuery} = require("graphql-jit");
 
 
-module.exports = function setupHandler(schema) {
+module.exports = function setupHandler(schema, customJSONSerializer) {
+    console.log(customJSONSerializer ? 'Using fast-json': 'Using JSON.stringify');
     const cache = new LRU({max: 100});
     return function graphqlMiddleware(request, response) {
         // Promises are used as a mechanism for capturing any thrown errors during
@@ -71,6 +72,7 @@ module.exports = function setupHandler(schema) {
                 }
 
                 cached = compileQuery(schema, documentAST, operationName, {
+                    customJSONSerializer,
                     customSerializers: {
                         String: String,
                         ID: String,

@@ -37,7 +37,7 @@ def parse_duration(time_str):
 
 async def run_wrk(endpoint, query, concurrency, duration, rate):
     wrk = await asyncio.create_subprocess_exec(
-        'wrk', '-t', '1', '-R', str(rate), '--latency', '-c', str(concurrency), '-d', str(int(duration)), '-s',
+        'wrk2', '-t', '1', '-R', str(rate), '--latency', '-c', str(concurrency), '-d', str(int(duration)), '-s',
         'misc/graphql.lua', endpoint, query, stdout=PIPE, stderr=PIPE)
 
     output, json_data = await wrk.communicate()
