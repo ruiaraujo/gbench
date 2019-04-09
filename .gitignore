@@ -2,3 +2,7 @@
 __pycache__
 /servers/graphql-go/gbench
 /servers/graph-gophers/gbench
+/servers/jvm/graphql-java/build/
+/servers/jvm/graphql-java/.gradle/
+/servers/jvm/lacinia/target/
+/.idea/

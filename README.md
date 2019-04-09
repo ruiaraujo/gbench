@@ -23,7 +23,7 @@ Gbench have currently two commands available
 `python gbench.py benchmark` will benchmark Servers and queries from a given [`config.yaml`](#config-file) and output into an optional json file (`results.json`)
 
 ```shell
-python gbench.py benchmark config.yaml results.json
+python3 gbench.py benchmark config.yaml results.json
 ```
 
 Also, after benchmarking a dashboard server will automatically run with the results.

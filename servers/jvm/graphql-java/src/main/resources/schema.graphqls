@@ -1,0 +1,11 @@
+interface Base {
+    id: String
+}
+
+type Query implements Base {
+    id: String
+    string: String
+    listOfStrings: [String]
+    listOfObjects: [Query]
+    listOfInterfaces: [Base]
+}

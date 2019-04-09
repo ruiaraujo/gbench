@@ -3,7 +3,16 @@ servers:
   endpoint: http://localhost:8081/graphql
   run:
     command: sbt run
-    cwd: servers/sangria-akka/
+    cwd: servers/jvm/sangria-akka/
+    startupTime: 15s
+  warmup:
+    concurrency: 1
+    duration: 10s
+- name: GraphQL-java
+  endpoint: http://localhost:8080/graphql
+  run:
+    command: ./gradlew bootRun
+    cwd: servers/jvm/graphql-java/
     startupTime: 15s
   warmup:
     concurrency: 1
@@ -13,7 +22,7 @@ servers:
   endpoint: http://localhost:8080/graphql
   run:
     command: python3 app.py
-    cwd: servers/japronto-graphene/
+    cwd: servers/python/
     startupTime: 2s
   warmup:
     concurrency: 1
@@ -23,48 +32,37 @@ servers:
   endpoint: http://localhost:8080/quiver
   run:
     command: python3 app.py
-    cwd: servers/japronto-graphene/
+    cwd: servers/python/
     startupTime: 2s
   warmup:
     concurrency: 1
     duration: 5s
 
-- name: Node Express
+- name: GraphQL-js
   endpoint: http://localhost:4000/graphql
   run:
     command: node app.js
-    cwd: servers/node-express/
+    cwd: servers/node/graphql-js
     startupTime: 2s
   warmup:
     concurrency: 1
     duration: 5s
 
-- name: Node Micro
+- name: GraphQL-JIT
   endpoint: http://localhost:4000/graphql
   run:
     command: node app.js
-    cwd: servers/node-micro/
+    cwd: servers/node/graphql-jit/
     startupTime: 2s
   warmup:
     concurrency: 1
     duration: 5s
 
-
-- name: Node JIT
-  endpoint: http://localhost:4000/graphql
-  run:
-    command: node app.js
-    cwd: servers/node-jit/
-    startupTime: 2s
-  warmup:
-    concurrency: 1
-    duration: 5s
-
-- name: Gophers Go
+- name: Graph Gophers
   endpoint: http://localhost:8082/graphql
   run:
     command: go run schema.go server.go
-    cwd: servers/graph-gophers/
+    cwd: servers/golang/graph-gophers/
     startupTime: 5s
   warmup:
     concurrency: 1
@@ -74,7 +72,7 @@ servers:
   endpoint: http://localhost:8083/graphql
   run:
     command: go run server.go
-    cwd: servers/graphql-go/
+    cwd: servers/golang/graphql-go/
     startupTime: 5s
   warmup:
     concurrency: 1
