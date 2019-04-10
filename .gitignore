@@ -1,8 +1,9 @@
 /wrk.log
 __pycache__
-/servers/graphql-go/gbench
-/servers/graph-gophers/gbench
+/servers/golang/graphql-go/gbench
+/servers/golang/graph-gophers/gbench
 /servers/jvm/graphql-java/build/
 /servers/jvm/graphql-java/.gradle/
 /servers/jvm/lacinia/target/
 /.idea/
+/venv/

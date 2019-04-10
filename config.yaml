@@ -6,7 +6,7 @@ servers:
     cwd: servers/jvm/sangria-akka/
     startupTime: 15s
   warmup:
-    concurrency: 1
+    concurrency: 5
     duration: 10s
 - name: GraphQL-java
   endpoint: http://localhost:8080/graphql
@@ -15,7 +15,17 @@ servers:
     cwd: servers/jvm/graphql-java/
     startupTime: 15s
   warmup:
-    concurrency: 1
+    concurrency: 5
+    duration: 10s
+
+- name: Lacinia
+  endpoint: http://localhost:3000/graphql
+  run:
+    command: lein ring server-headless
+    cwd: servers/jvm/lacinia/
+    startupTime: 10s
+  warmup:
+    concurrency: 5
     duration: 10s
 
 - name: Graphene
@@ -25,7 +35,7 @@ servers:
     cwd: servers/python/
     startupTime: 2s
   warmup:
-    concurrency: 1
+    concurrency: 5
     duration: 5s
 
 - name: Graphene+Quiver
@@ -35,7 +45,7 @@ servers:
     cwd: servers/python/
     startupTime: 2s
   warmup:
-    concurrency: 1
+    concurrency: 5
     duration: 5s
 
 - name: GraphQL-js
@@ -45,7 +55,7 @@ servers:
     cwd: servers/node/graphql-js
     startupTime: 2s
   warmup:
-    concurrency: 1
+    concurrency: 5
     duration: 5s
 
 - name: GraphQL-JIT
@@ -55,7 +65,7 @@ servers:
     cwd: servers/node/graphql-jit/
     startupTime: 2s
   warmup:
-    concurrency: 1
+    concurrency: 5
     duration: 5s
 
 - name: Graph Gophers
@@ -65,7 +75,7 @@ servers:
     cwd: servers/golang/graph-gophers/
     startupTime: 5s
   warmup:
-    concurrency: 1
+    concurrency: 5
     duration: 5s
 
 - name: Graphql-Go
@@ -75,7 +85,7 @@ servers:
     cwd: servers/golang/graphql-go/
     startupTime: 5s
   warmup:
-    concurrency: 1
+    concurrency: 5
     duration: 5s
 
 queries:
@@ -91,9 +101,9 @@ queries:
   filename: queries/object_list.graphql
   expectedResultFilename: queries/object_list.json
 
-- name: Interface List
-  filename: queries/interface_list.graphql
-  expectedResultFilename: queries/interface_list.json
+#- name: Interface List
+#  filename: queries/interface_list.graphql
+#  expectedResultFilename: queries/interface_list.json
 
 - name: Introspection
   filename: queries/introspection.graphql
