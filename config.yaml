@@ -1,6 +1,6 @@
 load:
-  duration: 300s
-  rate: 100
+  duration: 180s
+  rate: 1000
   concurrency: 20
 servers:
 - name: Sangria
@@ -8,7 +8,6 @@ servers:
   run:
     command: sbt run
     cwd: servers/jvm/sangria-akka/
-    startupTime: 15s
   warmup:
     concurrency: 5
     duration: 20s
@@ -17,7 +16,6 @@ servers:
   run:
     command: ./gradlew bootRun
     cwd: servers/jvm/graphql-java/
-    startupTime: 15s
   warmup:
     concurrency: 5
     duration: 20s
@@ -27,27 +25,15 @@ servers:
   run:
     command: lein ring server-headless
     cwd: servers/jvm/lacinia/
-    startupTime: 10s
   warmup:
     concurrency: 5
-    duration: 20s
+    duration: 10s
 
 - name: Graphene
   endpoint: http://localhost:8080/graphql
   run:
     command: python3 app.py
     cwd: servers/python/
-    startupTime: 2s
-  warmup:
-    concurrency: 5
-    duration: 20s
-
-- name: Graphene+Quiver
-  endpoint: http://localhost:8080/quiver
-  run:
-    command: python3 app.py
-    cwd: servers/python/
-    startupTime: 2s
   warmup:
     concurrency: 5
     duration: 20s
@@ -57,7 +43,6 @@ servers:
   run:
     command: node app.js
     cwd: servers/node/graphql-js
-    startupTime: 2s
   warmup:
     concurrency: 5
     duration: 20s
@@ -67,7 +52,6 @@ servers:
   run:
     command: node app.js
     cwd: servers/node/graphql-jit/
-    startupTime: 2s
   warmup:
     concurrency: 5
     duration: 20s
@@ -77,7 +61,6 @@ servers:
   run:
     command: go run schema.go server.go
     cwd: servers/golang/graph-gophers/
-    startupTime: 5s
   warmup:
     concurrency: 5
     duration: 20s
@@ -87,7 +70,6 @@ servers:
   run:
     command: go run server.go
     cwd: servers/golang/graphql-go/
-    startupTime: 5s
   warmup:
     concurrency: 5
     duration: 20s
@@ -107,7 +89,7 @@ queries:
 
 - name: Interface List
   filename: queries/interface_list.graphql
-  expectedResultFilename: queries/interface_list.json
+#  expectedResultFilename: queries/interface_list.json
 
 - name: Introspection
   filename: queries/introspection.graphql
