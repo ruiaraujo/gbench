@@ -1,18 +1,19 @@
 (ns gbench.core
     (:require [ring.middleware.json :refer [wrap-json-response wrap-json-body]]
-      [compojure.core :refer [POST defroutes]]
-      [com.walmartlabs.lacinia :as lacinia]
-      [gbench.schema :as schema]))
+              [ring.util.response :refer [response]]
+              [compojure.core :refer [POST defroutes]]
+              [com.walmartlabs.lacinia :as lacinia]
+              [gbench.schema :as schema]))
 
 
 (defn handler [request]
-      (response
-        (lacinia/execute
-          schema/test-schema (get-in request [:body "query"])
-           nil nil)))
+  (response
+   (lacinia/execute
+    schema/test-schema (get-in request [:body "query"])
+    nil nil)))
 
 (defroutes my-routes
-           (POST "/graphql" request (handler request)))
+  (POST "/graphql" request (handler request)))
 
 (def app
   (-> my-routes

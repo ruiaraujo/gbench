@@ -2,6 +2,9 @@ import os
 import re
 
 import asyncio
+import socket
+import time
+from urllib.parse import urlparse
 from asyncio.subprocess import PIPE
 import json
 import yaml
@@ -82,27 +85,40 @@ async def get_query_result(query_name, server_name, url, query_filename, rate, d
             }, response)
 
 
-async def endpoint_is_dead(endpoint):
-    curl = await asyncio.create_subprocess_exec(
-        'curl', endpoint, '-s', '-o', '/dev/null', '-w', '%{http_code}\n', stdout=PIPE, stderr=PIPE)
-    output, _ = await curl.communicate()
-    return int(output.decode('utf-8')) == 0
-
-
 async def force_termination(pid):
     kill = await asyncio.create_subprocess_exec(
         'kill', '-9', str(pid))
     await kill.communicate()
 
 
-async def bench_server(name, command, cwd, output_folder, endpoint, queries, warmup_duration, command_ready_seconds,
+def wait_for_port(port, host='localhost', timeout=60):
+    """Wait until a port starts accepting TCP connections.
+    Args:
+        port (int): Port number.
+        host (str): Host address on which the port should exist.
+        timeout (float): In seconds. How long to wait before raising errors.
+    Raises:
+        TimeoutError: The port isn't accepting connection after time specified in `timeout`.
+    """
+    start_time = time.perf_counter()
+    print("Waiting {}s for {}:{}".format(timeout, host, port))
+    while True:
+        try:
+            with socket.create_connection((host, port), timeout=timeout):
+                break
+        except OSError as ex:
+            time.sleep(0.01)
+            if time.perf_counter() - start_time >= timeout:
+                raise TimeoutError('Waited too long for the port {} on host {} to start accepting '
+                                   'connections.'.format(port, host)) from ex
+
+
+async def bench_server(name, command, cwd, output_folder, endpoint, queries, warmup_duration,
                        warmup_concurrency, rate, duration, concurrency):
     print("Starting server: {}".format(name))
-    if not await endpoint_is_dead(endpoint):
-        print("- Can't start the server as there is a process already running on {}".format(endpoint))
-
     server = await start_server(command, cwd)
-    await asyncio.sleep(command_ready_seconds)
+    wait_for_port(urlparse(endpoint).port)
+    print("Detected server start")
     try:
         for query in queries:
             result, response = None, None
@@ -125,6 +141,8 @@ async def bench_server(name, command, cwd, output_folder, endpoint, queries, war
                     result['response'], expected_result
                 ))
 
+    except TimeoutError as te:
+        print(te)
     except:
         raise
     finally:
@@ -132,8 +150,6 @@ async def bench_server(name, command, cwd, output_folder, endpoint, queries, war
         if server.returncode is None:
             server.terminate()
         await server.wait()
-        await asyncio.sleep(1)
-        # await force_termination(server.pid)
         await asyncio.sleep(1)
         print("Terminated")
 
@@ -171,7 +187,6 @@ async def _main(config, output_folder):
             server_run = server.get('run')
             server_command = server_run.get('command')
             server_cwd = server_run.get('cwd') or "./"
-            server_wait = parse_duration(server_run.get('startupTime', 2))
             server_endpoint = server.get('endpoint')
             server_warmup = server.get('warmup') or {}
             server_warmup_duration = parse_duration(server_warmup.get('duration') or 0)
@@ -185,11 +200,12 @@ async def _main(config, output_folder):
                 queries=all_queries,
                 warmup_duration=server_warmup_duration,
                 warmup_concurrency=server_warmup_concurrency,
-                command_ready_seconds=server_wait,
                 concurrency=load_concurrency,
                 duration=load_duration,
                 rate=load_rate,
             )
+
+
 
 
 if __name__ == "__main__":

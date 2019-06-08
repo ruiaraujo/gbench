@@ -2,7 +2,6 @@ from japronto import Application
 from ujson import dumps, loads
 from graphql import graphql, GraphQLCachedBackend, GraphQLCoreBackend
 from schema import schema
-from graphql.backend.quiver_cloud import GraphQLQuiverCloudBackend
 
 headers = {
     'Content-Type': 'application/json; charset=utf8'
@@ -34,10 +33,6 @@ def get_query_data(request):
         return get_json_body(request)
 
 backend = GraphQLCachedBackend(GraphQLCoreBackend())
-quiver_backend = GraphQLCachedBackend(GraphQLQuiverCloudBackend(
-    "http://6ea643a71f96482bae042729c0eedad4:ed675996b9914c549189e2adbc8c0412@api.graphql-quiver.com"
-))
-
 
 def graphql_view(request):
     data = get_query_data(request)
@@ -48,18 +43,8 @@ def graphql_view(request):
     return json_response(request, result.to_dict())
 
 
-def quiver_view(request):
-    # print(request.mime_type, request.body)
-    data = get_query_data(request)
-    query = data.get('query')
-    operation_name = data.get('operationName')
-    result = graphql(schema, query, backend=quiver_backend, operation_name=operation_name)
-    return json_response(request, result.to_dict())
-
-
 if __name__ == '__main__':
     app = Application()
     app.router.add_route('/basic', basic_view)
     app.router.add_route('/graphql', graphql_view)
-    app.router.add_route('/quiver', quiver_view)
     app.run()

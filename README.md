@@ -81,20 +81,8 @@ That means that for benchmarking `go` you will need `go` installed locally.
 This are the currently available languages for benchmark:
 
 - Python (with Japronto)
-- Node (Express)
+- Node
 - Sangia (Akka)
+- Java
+- Clojure
 - Go
-
-## Docker
-
-You can build the dashboard image in docker by doing:
-
-```
-docker build -t quiver/gbench .
-```
-
-And to run the dashboard:
-
-```
-docker run -p 8080:8080 quiver/gbench
-```
