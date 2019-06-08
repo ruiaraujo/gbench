@@ -1,3 +1,7 @@
+load:
+  duration: 300s
+  rate: 100
+  concurrency: 20
 servers:
 - name: Sangria
   endpoint: http://localhost:8081/graphql
@@ -7,7 +11,7 @@ servers:
     startupTime: 15s
   warmup:
     concurrency: 5
-    duration: 10s
+    duration: 20s
 - name: GraphQL-java
   endpoint: http://localhost:8080/graphql
   run:
@@ -16,7 +20,7 @@ servers:
     startupTime: 15s
   warmup:
     concurrency: 5
-    duration: 10s
+    duration: 20s
 
 - name: Lacinia
   endpoint: http://localhost:3000/graphql
@@ -26,7 +30,7 @@ servers:
     startupTime: 10s
   warmup:
     concurrency: 5
-    duration: 10s
+    duration: 20s
 
 - name: Graphene
   endpoint: http://localhost:8080/graphql
@@ -36,7 +40,7 @@ servers:
     startupTime: 2s
   warmup:
     concurrency: 5
-    duration: 5s
+    duration: 20s
 
 - name: Graphene+Quiver
   endpoint: http://localhost:8080/quiver
@@ -46,7 +50,7 @@ servers:
     startupTime: 2s
   warmup:
     concurrency: 5
-    duration: 5s
+    duration: 20s
 
 - name: GraphQL-js
   endpoint: http://localhost:4000/graphql
@@ -56,7 +60,7 @@ servers:
     startupTime: 2s
   warmup:
     concurrency: 5
-    duration: 5s
+    duration: 20s
 
 - name: GraphQL-JIT
   endpoint: http://localhost:4000/graphql
@@ -66,7 +70,7 @@ servers:
     startupTime: 2s
   warmup:
     concurrency: 5
-    duration: 5s
+    duration: 20s
 
 - name: Graph Gophers
   endpoint: http://localhost:8082/graphql
@@ -76,7 +80,7 @@ servers:
     startupTime: 5s
   warmup:
     concurrency: 5
-    duration: 5s
+    duration: 20s
 
 - name: Graphql-Go
   endpoint: http://localhost:8083/graphql
@@ -86,7 +90,7 @@ servers:
     startupTime: 5s
   warmup:
     concurrency: 5
-    duration: 5s
+    duration: 20s
 
 queries:
 - name: Basic
@@ -101,9 +105,9 @@ queries:
   filename: queries/object_list.graphql
   expectedResultFilename: queries/object_list.json
 
-#- name: Interface List
-#  filename: queries/interface_list.graphql
-#  expectedResultFilename: queries/interface_list.json
+- name: Interface List
+  filename: queries/interface_list.graphql
+  expectedResultFilename: queries/interface_list.json
 
 - name: Introspection
   filename: queries/introspection.graphql

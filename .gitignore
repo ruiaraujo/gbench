@@ -7,3 +7,4 @@ __pycache__
 /servers/jvm/lacinia/target/
 /.idea/
 /venv/
+/results

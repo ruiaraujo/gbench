@@ -10,9 +10,12 @@ If you want to run gbench locally, you will need Python 3.6+ and `wrk` working l
 
 ```shell
 pip install -r requirements.txt
-# For mac
-brew install wrk
 ```
+### WRK
+
+- Linux https://github.com/giltene/wrk2/wiki/Installing-wrk2-on-Linux
+- Mac OS X https://github.com/giltene/wrk2/wiki/Installing-wrk2-on-Mac
+
 
 ## Available commands
 
@@ -20,17 +23,17 @@ Gbench have currently two commands available
 
 ### Benchmark
 
-`python gbench.py benchmark` will benchmark Servers and queries from a given [`config.yaml`](#config-file) and output into an optional json file (`results.json`)
+`python3 gbench.py benchmark` will benchmark Servers and queries from a given [`config.yaml`](#config-file) and output into an optional json file (`results.json`)
 
 ```shell
-python3 gbench.py benchmark config.yaml results.json
+python3 gbench.py benchmark config.yaml
 ```
 
 Also, after benchmarking a dashboard server will automatically run with the results.
 
 ### Dashboard
 
-`python gbench.py dashboard results.json` will start a dashboard server using the given results file.
+`python3 gbench.py dashboard results.json` will start a dashboard server using the given results file.
 
 ## Config file
 

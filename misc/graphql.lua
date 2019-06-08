@@ -25,7 +25,6 @@ end
 function request()
   wrk.method = "POST"
   wrk.headers["Content-Type"] = "application/json"
-  -- wrk.headers["Content-Type"] = "application/graphql"
   wrk.body = req_body
   return wrk.format()
 end
@@ -60,11 +59,11 @@ function response(status, header, body)
 end
 
 function done(s, l, r)
-  
+
   local f = assert(io.open("wrk.log", "r"))
   local t = f:read("*all")
   f:close()
-  
+
   -- print("done", t)
   io.stderr:write(
     json.encode({
