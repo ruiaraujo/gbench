@@ -111,14 +111,16 @@ fast-json-stringify@^1.13.0:
     ajv "^6.8.1"
     deepmerge "^3.0.0"
 
-graphql-jit@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/graphql-jit/-/graphql-jit-0.1.0.tgz#ce22e59581e187840a40e41a3fdbdc614de1529d"
-  integrity sha512-5s3OuRS8J41HFUfXQ0S+ScYDVzGLf2aU2yFtimAphlgZWmaoMibIRkhvvpYfUCpOisTQBY3TaApJ8vjBraetYg==
+graphql-jit@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/graphql-jit/-/graphql-jit-0.3.1.tgz#5a76420683150b87e4542a771b1d4731657e3ef6"
+  integrity sha512-nuYt73G6gp6O52YzF0n+WpZiBWKjL5Ka2vX3ACblj1E/rQ2hHarHyKNCNhKluVmFqB6KzAt0rFnzzMqBpuSW0g==
   dependencies:
     fast-json-stringify "^1.13.0"
     json-schema "^0.2.3"
+    lodash.memoize "^4.1.2"
     lodash.merge "^4.6.1"
+    lodash.mergewith "^4.6.1"
 
 graphql@^14.2.1:
   version "14.2.1"
@@ -200,10 +202,20 @@ json-schema@^0.2.3:
   resolved "https://registry.yarnpkg.com/json-schema/-/json-schema-0.2.3.tgz#b480c892e59a2f05954ce727bd3f2a4e882f9e13"
   integrity sha1-tIDIkuWaLwWVTOcnvT8qTogvnhM=
 
+lodash.memoize@^4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
+  integrity sha1-vMbEmkKihA7Zl/Mj6tpezRguC/4=
+
 lodash.merge@^4.6.1:
   version "4.6.1"
   resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.1.tgz#adc25d9cb99b9391c59624f379fbba60d7111d54"
   integrity sha512-AOYza4+Hf5z1/0Hztxpm2/xiPZgi/cjMqdnKTUWTBSKchJlxXXuUSxCCl8rJlf4g6yww/j6mA8nC8Hw/EZWxKQ==
+
+lodash.mergewith@^4.6.1:
+  version "4.6.1"
+  resolved "https://registry.yarnpkg.com/lodash.mergewith/-/lodash.mergewith-4.6.1.tgz#639057e726c3afbdb3e7d42741caa8d6e4335927"
+  integrity sha512-eWw5r+PYICtEBgrBE5hhlT6aAa75f411bgDz/ZL2KZqYV03USvucsxcHUIlGTDTECs1eunpI7HOV7U+WLDvNdQ==
 
 lru-cache@^4.1.3:
   version "4.1.3"
